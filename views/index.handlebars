@@ -1,6 +1,21 @@
-  <div class="jumbotron">
-  <h1 class="display-4">DC Scraper</h1>
-  <p class="lead">This app scrapes articles from the DC Comics site and can be saved to a database as well as be commented on.</p>
-  <a id="scrapeButton"class="btn btn-primary btn-lg" role="button">Scrape Articles!</a>
-  <a id="savedArticleButton" class="btn btn-success btn-lg" role="button">Saved Articles!</a>
+  <div class="jumbotron justify-content-center">
+    <h1 class="display-4">DC Scraper</h1>
+    <p class="lead">This app scrapes articles from the DC Comics site and can be saved to a database as well as be
+      commented on.</p>
+    <a id="scrapeButton" class="btn btn-primary btn-lg" role="button">Scrape Articles!</a>
+    <a id="savedArticleButton" class="btn btn-success btn-lg" role="button">Saved Articles!</a>
+
+    <div class="scrapedContent">
+      <div id="articles">
+        {{#each Article}}
+        <div class="card">
+          <div class-"card-body">
+            <h1 class="card-title">{{Article.headline}}</h1>
+            <p>{{Article.summary}}</p>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
   </div>
+  <script src="app.js"></script>

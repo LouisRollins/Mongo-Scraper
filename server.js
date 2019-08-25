@@ -43,9 +43,36 @@ mongoose.connect("mongodb://localhost/mongoHeadlines", { useNewUrlParser: true }
 app.get("/scrape", function(req, res){
   axios.get("http://www.dccomics.com/news").then(function(response){
     var $ = cheerio.load(response.data);
-
+    $(".views-row").each(function(i, element){
+      var result={};
+      result.headline= $(this)
+        .children(".article-title").children("a")
+        .text();
+      result.summary= $(this)
+        .children(".article-body")
+        .text();
+        db.Article.create(result)
+        .then(function(dbArticle) {
+          console.log(dbArticle);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    });
+    res.send("Success")
   })
-})
+});
+
+app.get("/articles", function(req, res) {
+  db.Article.find({})
+    .then(function(dbArticle) {
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
+});
+
 
 app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");
