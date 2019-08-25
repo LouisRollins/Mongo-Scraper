@@ -26,12 +26,26 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+// Import routes and give the server access to them.
+var routes = require("./routes/routes.js");
+
+app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/mongoHeadlines", { useNewUrlParser: true });
 
 
+app.get("/scrape", function(req, res){
+  axios.get("http://www.dccomics.com/news").then(function(response){
+    var $ = cheerio.load(response.data);
 
+  })
+})
 
 app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");
