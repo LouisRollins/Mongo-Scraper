@@ -11,3 +11,10 @@ $("#scrapeButton").on("click", function(){
     })
     
 })
+
+// $(".commentButton").on("click", function(){
+//   $.ajax({
+//     method: "PUT",
+//     url: "/comments"
+//   })
+// })
