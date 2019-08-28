@@ -73,6 +73,23 @@ app.get("/articles", function(req, res) {
     });
 });
 
+app.get("/saveThis", function(req, res){
+  db.Article.updateOne(
+    {where: {_id: req.body._id}},
+    {$set: {saved: true}
+    }
+  )
+})
+
+app.get("/saved", function(req, res){
+  db.Article.find({saved: true})
+    .then(function(dbArticle) {
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
+})
 
 app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");

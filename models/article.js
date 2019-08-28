@@ -5,11 +5,17 @@ var Schema = mongoose.Schema;
 var ArticleSchema = new Schema({
     headline: {
       type: String,
-      required: true
+      required: true,
+      unique: true
     },
     summary: {
         type: String,
-        required: true
+        required: true,
+        unique: true
+    },
+    saved: {
+      type: Boolean,
+      default: false
     },
     // `comment` is an object that stores a comment id
     // The ref property links the ObjectId to the comments model

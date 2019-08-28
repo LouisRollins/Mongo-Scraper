@@ -7,8 +7,11 @@ router.get("/", function(req, res) {
     //   };
     //   console.log(hbsObject);
       res.render("index.handlebars");
-    // });
-  });
+    });
+  // });
+  router.get("/saved", function(req, res){
+    res.render("saved.handlebars")
+  })
 
 module.exports = router
   
