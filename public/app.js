@@ -17,12 +17,10 @@ $("#savedButton").on("click", function(){
     method: "GET",
     url: "/saved"
   }).then(function(data){
-    $.getJSON("/saveThis", function(data) {
-      $("#articles").empty();
+    $("#articles").empty();
       for (var i = 0; i < data.length; i++) {
         $("#articles").append("<br /><p data-id='" + data[i]._id + "'>" + data[i].headline + "<br />" + data[i].summary + "</p><br />");
       }
-    });
   })
 });
 
@@ -32,21 +30,13 @@ $(".scrapedContent").on('click','.saveThisArticle',function(){
     method: "POST",
     url: "/saveThis",
     data: {
-      _id: $(this).data("id")      
+      _id: $(this).data("id"),
+      headline: $(this).data("headline"),
+      summary: $(this).data("summary")      
+      
     }
   })
 });
 
-// $(".saveThisArticle").on("click", function(){
-//   $.ajax({
-//     method: "POST",
-//     url: "/saveThis",
-//     data: {
-//       _id: this._id,
-//       headline: this.headline,
-//       summary: this.summary
-//     }
-//   })
-// })
 
 

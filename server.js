@@ -75,9 +75,8 @@ app.get("/articles", function(req, res) {
 
 app.post("/saveThis", function(req, res){
   db.Article.updateOne(
-    {where: {_id: req.body._id}},
-    {$set: {saved: true}
-    }
+      {_id: req.body._id},
+      {saved: true}
   ).then(function(data){
     res.json(data);
   })
@@ -99,4 +98,3 @@ app.get("/saved", function(req, res){
 app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");
   });
-  
