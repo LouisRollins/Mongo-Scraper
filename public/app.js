@@ -5,7 +5,7 @@ $("#scrapeButton").on("click", function(){
     }).then(function(){
         $.getJSON("/articles", function(data) {
             for (var i = 0; i < data.length; i++) {
-              $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].headline + "<br />" + data[i].summary + "</p><button class='btn btn-danger saveThisArticle' data-id='" + data[i]._id + "'>Save Article</button>");
+              $("#articles").append("<br /><p data-id='" + data[i]._id + "'>" + data[i].headline + "<br />" + data[i].summary + "</p><button class='btn btn-danger saveThisArticle' data-id='" + data[i]._id + "'>Save Article</button><br />");
             }
           });
     })
@@ -17,9 +17,10 @@ $("#savedButton").on("click", function(){
     method: "GET",
     url: "/saved"
   }).then(function(data){
-    $.getJSON("/saved", function(data) {
+    $.getJSON("/saveThis", function(data) {
+      $("#articles").empty();
       for (var i = 0; i < data.length; i++) {
-        $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].headline + "<br />" + data[i].summary + "</p>");
+        $("#articles").append("<br /><p data-id='" + data[i]._id + "'>" + data[i].headline + "<br />" + data[i].summary + "</p><br />");
       }
     });
   })
@@ -29,7 +30,7 @@ $(".scrapedContent").on('click','.saveThisArticle',function(){
  
   $.ajax({
     method: "POST",
-    url: "/saved",
+    url: "/saveThis",
     data: {
       _id: $(this).data("id")      
     }
@@ -48,9 +49,4 @@ $(".scrapedContent").on('click','.saveThisArticle',function(){
 //   })
 // })
 
-// $(".commentButton").on("click", function(){
-//   $.ajax({
-//     method: "PUT",
-//     url: "/comments"
-//   })
-// })
+

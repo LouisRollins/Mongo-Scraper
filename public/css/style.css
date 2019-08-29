@@ -1,4 +1,7 @@
-.card-body{
-    border: 5px blue;
-    border-radius: 5px;
+body, .jumbotron{
+    background-color: black;
+}
+
+h1, p{
+    color: white;
 }
