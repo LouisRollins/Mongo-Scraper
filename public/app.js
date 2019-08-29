@@ -25,17 +25,28 @@ $("#savedButton").on("click", function(){
   })
 });
 
-$(".saveThisArticle").on("click", function(){
+$(".scrapedContent").on('click','.saveThisArticle',function(){
+ 
   $.ajax({
     method: "POST",
-    url: "/saveThis",
+    url: "/saved",
     data: {
-      _id: this._id,
-      headline: this.headline,
-      summary: this.summary
+      _id: $(this).data("id")      
     }
   })
-})
+});
+
+// $(".saveThisArticle").on("click", function(){
+//   $.ajax({
+//     method: "POST",
+//     url: "/saveThis",
+//     data: {
+//       _id: this._id,
+//       headline: this.headline,
+//       summary: this.summary
+//     }
+//   })
+// })
 
 // $(".commentButton").on("click", function(){
 //   $.ajax({

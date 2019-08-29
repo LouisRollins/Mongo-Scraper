@@ -73,12 +73,17 @@ app.get("/articles", function(req, res) {
     });
 });
 
-app.get("/saveThis", function(req, res){
+app.post("/saved", function(req, res){
   db.Article.updateOne(
     {where: {_id: req.body._id}},
     {$set: {saved: true}
     }
-  )
+  ).then(function(data){
+    res.json(data);
+  })
+  .catch(function(err){
+    res.json(err)
+  })
 })
 
 app.get("/saved", function(req, res){
